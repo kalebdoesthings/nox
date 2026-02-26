@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Nox - Register</title>
+</head>
+<body onload="checkStatus()">
+    
+<script>
+const userStatus = {{ status|default(None)|tojson }};
+
+function checkStatus() {
+    if (userStatus === "taken") {
+       showNotification("Error", "Username already taken.", false);
+    }
+    else if (userStatus === "success") {
+        showNotification("Success", "Login Successful", true);
+    }
+}
+</script>
+
+<script src="{{ url_for('static', filename='scripts/notification.js') }}">
+
+
+
+
+
+</script>
+
+
+<script></script>
+
+
+
+<!-- <div class="notification success">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16"> <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/> </svg>
+  <h1> HOLY ERROR</h1>
+   <h2>Ts is why the error happened little bro</h2>
+  </div> -->
+
+
+    <div id="particles-js"></div>
+
+
+
+<div class="container">
+
+<h1 id="logintext">REGISTER</h1>
+
+
+<form action="{{ url_for('register') }}" method="POST">
+
+<input placeholder="USERNAME" name="username" type="text" id="username"></input>
+<input placeholder="PASSWORD" name="password" type="password" id="password"></input>
+<button type="submit" value="Submit">SUBMIT</button>
+
+
+</form>
+
+
+
+<h2>Back to <a href="{{ url_for('login') }}">Login</a></h2>
+
+
+</div>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+
+
+
+
+<script>
+particlesJS('particles-js', {
+  "particles": {
+    "number": {
+      "value": 177,
+      "density": {
+        "enable": true,
+        "value_area": 879.1068274632977
+      }
+    },
+    "color": { "value": "#ffffff" },
+    "shape": {
+      "type": "circle",
+      "stroke": { "width": 0, "color": "#000000" },
+      "polygon": { "nb_sides": 5 }
+    },
+    "opacity": {
+      "value": 0.5,
+      "random": false,
+      "anim": {
+        "enable": false,
+        "speed": 1,
+        "opacity_min": 0.1,
+        "sync": false
+      }
+    },
+    "size": {
+      "value": 2,
+      "random": true,
+      "anim": {
+        "enable": false,
+        "speed": 40,
+        "size_min": 0.1,
+        "sync": false
+      }
+    },
+    "line_linked": {
+      "enable": true,
+      "distance": 150,
+      "color": "#ffffff",
+      "opacity": 0.4,
+      "width": 1
+    },
+    "move": {
+      "enable": true,
+      "speed": 2.5,
+      "direction": "none",
+      "random": true,
+      "straight": false,
+      "out_mode": "bounce",
+      "bounce": false,
+      "attract": {
+        "enable": false,
+        "rotateX": 600,
+        "rotateY": 1200
+      }
+    }
+  },
+  "interactivity": {
+    "detect_on": "canvas",
+    "events": {
+      "onhover": { "enable": false, "mode": "repulse" },
+      "onclick": { "enable": true, "mode": "push" },
+      "resize": true
+    },
+    "modes": {
+      "grab": {
+        "distance": 400,
+        "line_linked": { "opacity": 1 }
+      },
+      "bubble": {
+        "distance": 400,
+        "size": 40,
+        "duration": 2,
+        "opacity": 8,
+        "speed": 3
+      },
+      "repulse": {
+        "distance": 200,
+        "duration": 0.4
+      },
+      "push": { "particles_nb": 4 },
+      "remove": { "particles_nb": 2 }
+    }
+  },
+  "retina_detect": true
+});
+</script>
+
+
+
+
+</body>
+</html>
