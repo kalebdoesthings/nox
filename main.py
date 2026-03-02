@@ -5,7 +5,9 @@ import uuid
 import time
 from dotenv import load_dotenv
 from datetime import timedelta
+import os
 
+load_dotenv("key.env")
 USER_DB_PATH = "db/users.db"
 
 app = Flask(__name__)
