@@ -40,7 +40,7 @@ notification.appendChild(svg)
 
 setTimeout(() => {
     notification.remove()
-    if (login=true) {
+    if (login===true) {
         window.location.replace(redirectUrl);
     }
     

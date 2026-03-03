@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sqlite3 /c/nox/db/users.db \".schema\")",
+      "Bash(python3 -c \"import sqlite3; conn = sqlite3.connect\\(''/c/nox/db/users.db''\\); cursor = conn.cursor\\(\\); cursor.execute\\(\"\"SELECT name FROM sqlite_master WHERE type=''table'';\"\"\\); tables = cursor.fetchall\\(\\); print\\(''Tables:'', tables\\); [print\\(f''Table {t[0]}:'', cursor.execute\\(f''PRAGMA table_info\\({t[0]}\\)''\\).fetchall\\(\\)\\) for t in tables]; conn.close\\(\\)\")",
+      "Bash(/c/Python314/python -c \"import sqlite3; conn = sqlite3.connect\\(''/c/nox/db/users.db''\\); cursor = conn.cursor\\(\\); cursor.execute\\(\"\"SELECT name FROM sqlite_master WHERE type=''table'';\"\"\\); tables = cursor.fetchall\\(\\); print\\(''=== TABLES ===''\\); print\\(tables\\); print\\(''\\\\n=== SCHEMA ===''\\); [print\\(f''\\\\nTable: {t[0]}\\\\n'', cursor.execute\\(f''PRAGMA table_info\\({t[0]}\\)''\\).fetchall\\(\\)\\) for t in tables]; conn.close\\(\\)\")",
+      "Bash(/c/Python314/python:*)",
+      "Bash(python -c \"import sqlite3; conn = sqlite3.connect\\(''c:/nox/db/users.db''\\); cursor = conn.cursor\\(\\); cursor.execute\\(\"\"SELECT sql FROM sqlite_master WHERE type=''table''\"\"\\); [print\\(row[0]\\) for row in cursor.fetchall\\(\\)]; cursor.execute\\(''SELECT * FROM users''\\); [print\\(dict\\(zip\\([d[0] for d in cursor.description], row\\)\\)\\) for row in cursor.fetchall\\(\\)]; conn.close\\(\\)\")"
+    ]
+  }
+}

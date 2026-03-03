@@ -16,13 +16,32 @@
 
 <h1 id="time"></h1>
 
+<h1 id="weather"></h1>
 
-<div class="friends"></div>
+<div class="friends">
+
+
+<h1>FRIENDS</h1>
+
+<form class="search-wrapper" onsubmit="searchUser()">
+
+<img src="../static/svg/search.svg" class="search-icon"/>
+
+<input placeholder="Search username..."></input>
+
+</form>
+<div class="outlinebar"></div>
+
+
+
+
+
+</div>
 
 
 </div>
 <script src="{{ url_for('static', filename='scripts/time.js') }}"></script>
-
+<script src="{{ url_for('static', filename='scripts/weather.js') }}"></script>
 
 
 

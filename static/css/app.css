@@ -1,6 +1,6 @@
 
 @font-face {
-  font-family: 'ibmmo1';
+  font-family: 'ibmmono';
   src: url('../fonts/IBMPlexMono-Medium.ttf');
   font-weight: normal;
   font-style: normal;
@@ -16,11 +16,31 @@
 @-webkit-keyframes tracking-in-expand{0%{letter-spacing:-.5em;opacity:0}40%{opacity:.6}100%{opacity:1}}@keyframes tracking-in-expand{0%{letter-spacing:-.5em;opacity:0}40%{opacity:.6}100%{opacity:1}}
 
 
+.weather-top {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    top: 2.5vh;
+    right: 1.2vw;
+}
 
 
+.weather-status {
+    font-size: 1vw;
+    opacity: 0.6;
+    position: relative;
+    top: 3vh;
+    
+}
 
 
-
+.weather-icon {
+    width: 2.5vw;
+    height: 2.5vw;
+    vertical-align: middle;
+    filter: invert(1);  /* makes black SVGs white */
+}
 
 
 body {
@@ -62,12 +82,22 @@ animation-delay: 1s;
 }
 
 
+#weather {
+  font-size: 2vw;
+  position: absolute;
+  bottom: 85vh;
+  left: 72vw;
+  animation: slide-in-blurred-bottom 0.9s cubic-bezier(0.230, 1.000, 0.320, 1.000) 0.1s both;
+}
+
+
+
 
 .item-container {
   height: 95vh;
   position: relative;
   top: 1.5vh;
-  width: 10vw;
+  width: 6vw;
    display: flex;
     
     scrollbar-width: thin;
@@ -83,14 +113,113 @@ align-items: center;
 
 .friends {
 position: relative;
-top: 17vh;
+flex-direction: column;
+align-items: center;
+top: 13vh;
 border-radius: 1vw;
-width: 20vw;
-height: 50vh;
-background-color: wheat;
+display: flex;
+width: 25vw;
+height: 60vh;
+background-color: rgb(30, 30, 30);
+
 
 
   
+}
+
+
+.search-icon {
+    width: 1.2vw;
+    height: 1.2vw;
+    filter: invert(1);
+    opacity: 0.5;
+    position: relative;
+    left: 1.2vw;
+    transition: opacity 0.2s ease;
+}
+
+
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    width: 89%;
+    position: relative;
+    top: 1vh;
+
+}
+
+
+.search-wrapper input {
+    position: relative;
+    transition: border-color 0.2s ease-in-out, color 0.2s ease;
+    font-size: 1.5vw;
+    background-color: transparent;
+    border: none;
+    color: rgb(255, 255, 255, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    outline: none;
+    font-family: ibmmono;
+    padding-left: 2vw;
+    width: 80%;
+}
+
+
+.search-wrapper:hover .search-icon {
+    opacity: 0.7;
+}
+
+.search-wrapper:focus-within .search-icon {
+    opacity: 1;
+}
+
+
+.search-wrapper:hover input {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+    
+}
+
+.search-wrapper:focus-within input {
+    border-bottom: 1px solid rgba(255, 255, 255, 1);
+}
+
+
+.search-wrapper input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    transition: color 0.2s ease;
+}
+
+.search-wrapper:hover input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.search-wrapper:focus-within input::placeholder {
+    color: rgba(255, 255, 255, 1);
+}
+
+
+
+
+
+
+
+.friends h1 {
+
+  color: rgb(255, 255, 255);
+
+
+
+
+
+}
+
+
+.outlinebar{
+width: 90%;
+    height: 2px;
+    background-color: rgba(216, 208, 208, 0.873);
+    position: relative;
+    bottom: 5vh;
 }
 
 
@@ -112,8 +241,8 @@ bottom: 85vh;
 flex: 0 0 auto;
 border-radius: 0.5vw;
 
-width: 8vw;
-height: 13vh;
+width: 4vw;
+height: 8vh;
 background-color: rgb(199, 0, 0);
 margin: 0.7vw;
 
