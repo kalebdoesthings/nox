@@ -8,14 +8,14 @@ from datetime import timedelta
 import os
 import requests
 import json
-
+from flask_socketio import SocketIO, emit, join_room, leave_room
 
 
 load_dotenv("key.env")
 USER_DB_PATH = "db/users.db"
 
 app = Flask(__name__)
-
+socketio = SocketIO(app)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY")
 
 conn = sqlite3.connect("db/users.db")
@@ -97,13 +97,14 @@ def login():
         if bcrypt.checkpw(password.encode("utf-8"), stored_hash):
             redirect_url = url_for('app_page')
             cursor.execute(
-            "SELECT uid, password FROM users WHERE username = ?",
+            "SELECT uid, username, password FROM users WHERE username = ?",
             (username,)
             )
             row = cursor.fetchone()
 
           
             session['uid'] = row["uid"]
+            session['username'] = row["username"]
             return render_template("login.html", status="success", redirect_url=redirect_url)
             
         else:
@@ -111,11 +112,61 @@ def login():
 
     return render_template("login.html", status=None)
 
+
+
+@app.route("/usersearch",  methods=["GET", "POST"])
+def searchForUser():
+    data = request.get_json()
+    friendusername = data.get("username")
+    uid = session.get("uid")
+    
+    cursor = userconn.cursor()
+    
+    cursor.execute("SELECT uid, username FROM users WHERE username LIKE ?", (f"%{friendusername}%",))
+
+
+
+
+    results = [dict(row) for row in cursor.fetchall()]
+    
+    if not results:
+        return jsonify({"results": "404_Username"})
+    
+    
+    receiverUid = results[0]['uid']
+    conn = sqlite3.connect("db/users.db")
+    cursor = conn.cursor()
+    cursor.execute("""
+    SELECT * FROM friends 
+    WHERE status = 'accepted' 
+    AND ((addressee_uid = ? AND requester_uid = ?) 
+    OR (addressee_uid = ? AND requester_uid = ?))
+""", (uid, receiverUid, receiverUid, uid))
+    isFriends = cursor.fetchone()
+    conn.close()
+    
+    if isFriends:
+        print("dey are fwends")
+    else:
+        print("dey arent fwends")
+    receiverUsername = results[0]['username']
+    return jsonify({"results": results})
+
+
+
+
+
 def get_user_by_uid():
     uid = session.get("uid")
     if not uid:
         return None
-
+    
+    username = session.get("username")
+    if not username:
+        return None
+    
+    
+    
     conn = sqlite3.connect(USER_DB_PATH)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
@@ -138,6 +189,30 @@ def app_page():
         username=user["username"],
         isAdmin=user["isAdmin"]
     )
+
+
+
+@socketio.on('connect')
+def handle_connect():
+    uid = session.get('uid')
+    if uid:
+        join_room(f'user_{uid}')
+        emit('user_online', {'uid': uid}, broadcast=True)
+        print(f'{uid} connected')
+
+@socketio.on('disconnect')
+def handle_disconnect():
+    uid = session.get('uid')
+    if uid:
+        leave_room(f'user_{uid}')
+        emit('user_offline', {'uid': uid}, broadcast=True)
+        print(f'{uid} disconnected')
+
+
+
+
+
+
 
 
 

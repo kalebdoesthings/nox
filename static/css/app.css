@@ -204,7 +204,7 @@ background-color: rgb(30, 30, 30);
 
 
 .friends h1 {
-
+    font-weight: 100;
   color: rgb(255, 255, 255);
 
 
@@ -212,6 +212,42 @@ background-color: rgb(30, 30, 30);
 
 
 }
+
+.friendPfp {
+  width: 4vh;
+  height: 4vh;
+  margin-left: 0.5vw;
+  margin-right: 0.5vw;
+  filter: invert(100%);
+  object-fit: contain;
+}
+
+.friendpanel {
+top: 2vh;
+margin-top: 2vh;
+position: relative;
+width: 89%;
+height: 6vh;
+border-radius: 0.5vw;
+background-color: transparent;
+border: solid 0.1vw rgb(255, 255, 255, 0.7);
+display: flex;
+  align-items: center;
+
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 .outlinebar{

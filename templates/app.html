@@ -23,11 +23,11 @@
 
 <h1>FRIENDS</h1>
 
-<form class="search-wrapper" onsubmit="searchUser()">
+<form class="search-wrapper" onsubmit="event.preventDefault()">
 
 <img src="../static/svg/search.svg" class="search-icon"/>
 
-<input placeholder="Search username..."></input>
+<input placeholder="Search username..." name="username"></input>
 
 </form>
 <div class="outlinebar"></div>
@@ -40,8 +40,10 @@
 
 
 </div>
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 <script src="{{ url_for('static', filename='scripts/time.js') }}"></script>
 <script src="{{ url_for('static', filename='scripts/weather.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/searchUser.js') }}"></script>
 
 
 
